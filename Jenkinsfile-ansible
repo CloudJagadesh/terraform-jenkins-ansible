@@ -19,7 +19,7 @@ pipeline{
       stage ('Terraform init and apply - prod'){
           steps {
               script{
-                sh " ansible-playbook terraform.yml -e app_env=prod"
+                sh " ansible-playbook terraform.yml -e app_env prod"
         }
       }
     }
