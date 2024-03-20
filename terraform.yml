@@ -1,0 +1,20 @@
+---
+- hosts: localhost
+  vars:
+    state: present
+    s3_bucket: mybucket-tf
+    region: ap-south-1
+    key: terraform.tfstate
+    app_env: dev
+  tasks:
+    - name: Run Terraform Scripts
+      terraform:
+        project_path: 'project/'
+          state: {{ state }}
+          force_init: true
+        backend_config:
+          region: {{ region }}
+          bucket: {{ s3_bucket }}
+          key: {{ key }}
+        variables_files: "{{ app_env }}.tfvars"
+        workspace: {{ app_env }}
