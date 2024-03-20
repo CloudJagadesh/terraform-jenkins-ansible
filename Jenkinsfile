@@ -4,6 +4,11 @@ pipeline{
         PATH = "${PATH}:${getTerraformPath()}"
     }
     stages {
+        stage('S3 - Create Bucket'){
+            steps{
+                createS3Bucket('mybucket-tf')
+            }
+        }
       stage ('Terraform init and apply - dev'){
           steps {
               script{
@@ -19,4 +24,8 @@ pipeline{
 def getTerraformPath(){
     def tfHome = tool name: 'Terraform-1.7.4', type: 'terraform'
     return tfHome
+}
+
+def createS3Bucket(bucketName){
+    sh returnStatus: true, script: "aws s3 mb ${bucketName} --region=ap-south-1"
 }
