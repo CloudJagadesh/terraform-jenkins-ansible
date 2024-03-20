@@ -1,7 +1,7 @@
 ---
 - hosts: localhost
   vars:
-    state: present
+    state: absent
     s3_bucket: mybucket-tf
     region: ap-south-1
     key: terraform.tfstate
