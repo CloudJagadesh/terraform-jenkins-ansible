@@ -19,7 +19,7 @@ pipeline{
       stage ('Terraform init and apply - prod'){
           steps {
               script{
-                sh " ansible-playbook terraform.yml -e app_env prod"
+                sh "ansible-playbook terraform.yml -e app_env=prod"
         }
       }
     }
@@ -32,5 +32,5 @@ def getTerraformPath(){
 }
 
 def createS3Bucket(bucketName){
-    sh returnStatus: true, script: "aws s3 mb s3://${bucketName} --region ap-south-1"
+    sh returnStatus: true, script: "aws s3 mb s3://${bucketName} --region=ap-south-1"
 }
