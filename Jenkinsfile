@@ -18,6 +18,15 @@ pipeline{
           }
         }
       }
+      stage ('Terraform init and apply - prod'){
+          steps {
+              script{
+                  sh "terraform init"
+                  sh returnStatus: true, script: "terraform workspace new prod"
+                  sh "terraform apply -var-file=prod.tfvars --auto-approve"
+          }
+        }
+      }
     }
 }
 
