@@ -4,4 +4,4 @@
     - name: Create S3 Bucket
       s3_bucket:
         name: mybucket-tf
-        state: absent
+        state: present
